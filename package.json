@@ -1,0 +1,27 @@
+{
+  "name": "bot",
+  "version": "1.0.0",
+  "description": "Discord bot for score saber api",
+  "main": "index.js",
+  "dependencies": {
+    "@typeit/discord": "^4.0.8",
+    "@types/node": "^14.6.0",
+    "discord.js": "^12.3.1",
+    "tslib": "^2.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Score-saber/bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Score-saber/bot/issues"
+  },
+  "homepage": "https://github.com/Score-saber/bot#readme"
+}
