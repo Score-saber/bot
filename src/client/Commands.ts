@@ -1,7 +1,17 @@
-import { Discord, CommandNotFound, CommandMessage } from '@typeit/discord';
+import { Discord, CommandNotFound, CommandMessage, Command } from '@typeit/discord';
+import fetch from 'node-fetch';
 
-@Discord()
+@Discord("--!")
 export default class Commands {
     @CommandNotFound()
     private async commandNotFound(message: CommandMessage) {}
+
+    @Command("stats :player")
+    private async getPlayer(message: CommandMessage) {
+        fetch(`http://localhost/player/${message.args.player}`)
+        .then(res => res.json())
+        .then(data => {
+            
+        });
+    }
 }

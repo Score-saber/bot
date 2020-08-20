@@ -7,6 +7,7 @@
     "@typeit/discord": "^4.0.8",
     "@types/node": "^14.6.0",
     "discord.js": "^12.3.1",
+    "node-fetch": "^2.6.0",
     "tslib": "^2.0.1"
   },
   "devDependencies": {},
