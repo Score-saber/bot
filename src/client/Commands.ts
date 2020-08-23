@@ -2,6 +2,7 @@ import { Discord, CommandNotFound, CommandMessage, Command } from '@typeit/disco
 import { MessageEmbed } from 'discord.js';
 import fetch from 'node-fetch';
 import { prefix } from '../Config';
+import { ExtractValueFromObject } from 'jsonarraytools';
 
 @Discord(prefix)
 export default class Commands {
@@ -37,10 +38,26 @@ export default class Commands {
 
     @Command("badges :player")
     private async getPlayerBadges(message: CommandMessage) {
-        fetch(`http://localhost/player/${message.args.player}/badges`)
+        fetch(`http://localhost/player/${message.args.player}/`)
         .then(res => res.json())
         .then(data => {
+            const { badges, avatar, playerName } = data.playerInfo; 
 
+            let Badges = ExtractValueFromObject(badges, 'description');
+            
+            Badges.forEach((badge) => {
+                message.channel.send(new MessageEmbed()
+                    .setColor('#34ebcf')
+                    .setTitle(`${playerName}'s badges`)
+                    .setThumbnail(`https://new.scoresaber.com${avatar}`)
+                    .addFields(
+                        {
+                            name: `\u200B`,
+                            value: `${badge}`
+                        }
+                    )
+                );
+            });
         });
     }
 
