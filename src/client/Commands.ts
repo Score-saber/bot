@@ -66,16 +66,62 @@ export default class Commands {
         fetch(`http://localhost/player/${message.args.player}/recent`)
         .then(res => res.json())
         .then(data => {
-
+            const { scores } = data;
+            scores.forEach((score) => {
+                message.channel.send(new MessageEmbed()
+                    .setColor('#34ebcf')
+                    .addFields(
+                        {
+                            name: `Song Name`,
+                            value: `${score.songName}`
+                        },
+                        {
+                            name: `Author`,
+                            value: `${score.songAuthorName}`
+                        },
+                        {
+                            name: 'Score',
+                            value: `${score.score}/${score.maxScore}`
+                        },
+                        {
+                            name: 'PP',
+                            value: `${score.pp}`
+                        }
+                    )
+                );
+            });
         });
     }
 
-    @Command("top :palyer")
+    @Command("top :player")
     private async getTopPlayer(message: CommandMessage) {
         fetch(`http://localhost/player/${message.args.player}/top`)
         .then(res => res.json())
         .then(data => {
-
+            const { scores } = data;
+            scores.forEach((score) => {
+                message.channel.send(new MessageEmbed()
+                    .setColor('#34ebcf')
+                    .addFields(
+                        {
+                            name: `Song Name`,
+                            value: `${score.songName}`
+                        },
+                        {
+                            name: `Author`,
+                            value: `${score.songAuthorName}`
+                        },
+                        {
+                            name: 'Score',
+                            value: `${score.score}/${score.maxScore}`
+                        },
+                        {
+                            name: 'PP',
+                            value: `${score.pp}`
+                        }
+                    )
+                );
+            });
         });
     }
 
@@ -84,7 +130,31 @@ export default class Commands {
         fetch(`http://localhost/players`)
         .then(res => res.json())
         .then(data => {
-
+            const { players } = data;
+            players.forEach((player) => {
+                message.channel.send(new MessageEmbed()
+                    .setColor('#34ebcf')
+                    .setThumbnail(`https://new.scoresaber.com${player.avatar}`)
+                    .addFields(
+                        {
+                            name: `Player Name`,
+                            value: `${player.playerName}`
+                        },
+                        {
+                            name: `Rank`,
+                            value: `${player.rank}`
+                        },
+                        {
+                            name: `Country`,
+                            value: `${player.country}`
+                        },
+                        {
+                            name: `PP`,
+                            value: `${player.pp}`
+                        }
+                    )
+                )
+            });
         });
     }
 }
