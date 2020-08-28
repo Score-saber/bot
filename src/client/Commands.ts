@@ -9,6 +9,86 @@ export default class Commands {
     @CommandNotFound()
     private async commandNotFound(message: CommandMessage) {}
 
+    @Command("map :id")
+    private async getMap(message: CommandMessage) {
+        fetch(`http://localhost/map/${message.args.id}`)
+        .then(res => res.json())
+        .then(data => {
+            const { easy, normal, hard, expert, expertPlus } = data.maps.metadata.difficulties;
+            const { songName, songAuthorName, bpm } = data.maps.metadata;
+            const { downloads, plays, upVotes, downVotes, rating } = data.maps.stats;
+            const { coverURL } = data.maps;
+
+            message.channel.send(new MessageEmbed()
+                .setColor('#34ebcf')
+                .setTitle(`${songName}`)
+                .setAuthor(`${songAuthorName}`)
+                .setThumbnail(`https://beatsaver.com${coverURL}`)
+                .addFields(
+                    {
+                        name: 'Easy Mode',
+                        value: `${easy}`,
+                        inline: true
+                    },
+                    {
+                        name: 'Normal Mode',
+                        value: `${normal}`,
+                        inline: true
+                    },
+                    {
+                        name: 'Hard Mode',
+                        value: `${hard}`,
+                        inline: true
+                    },
+                    {
+                        name: 'Expert Mode',
+                        value: `${expert}`,
+                        inline: true
+                    },
+                    {
+                        name: 'Expert Plus Mode',
+                        value: `${expertPlus}`,
+                        inline: true
+                    },
+                )
+                .addFields(
+                    {
+                        name: 'BPM',
+                        value: `${bpm}`,
+                        inline: true
+                    },
+                    {
+                        name: 'Downloads',
+                        value: `${downloads}`,
+                        inline: true
+                    },
+                    {
+                        name: 'Plays',
+                        value: `${plays}`,
+                        inline: true
+                    },
+                )
+                .addFields(
+                    {
+                        name: 'Up votes',
+                        value: `${upVotes}`,
+                        inline: true
+                    },
+                    {
+                        name: 'Down votes',
+                        value: `${downVotes}`,
+                        inline: true
+                    },
+                    {
+                        name: '\u200B',
+                        value: `\u200B`,
+                        inline: true
+                    },
+                )
+            );
+        });
+    }
+
     @Command("stats :player")
     private async getPlayer(message: CommandMessage) {
         fetch(`http://localhost/player/${message.args.player}`)
