@@ -11,9 +11,10 @@
     "node-fetch": "^2.6.0",
     "tslib": "^2.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "typescript": "^4.0.5"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
   },
   "repository": {
@@ -21,8 +22,8 @@
     "url": "git+https://github.com/Score-saber/bot.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Kevin Muscara",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Score-saber/bot/issues"
   },
